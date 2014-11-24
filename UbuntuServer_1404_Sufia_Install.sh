@@ -12,7 +12,7 @@ demodir="$HOME/sebdemo" # Where the Sufia head will live.
 cd ~
 sudo apt-get update
 sudo apt-get upgrade -y
-sudo apt-get install -y openjdk-7-jdk unzip build-essential git python-software-properties software-properties-common sqlite3 lynx
+sudo apt-get install -y vim openjdk-7-jdk unzip build-essential git python-software-properties software-properties-common sqlite3 lynx
 
 # 2. Install Ruby 2.1.4
 # Brightbox also packages Passenger, which will be useful for production.
