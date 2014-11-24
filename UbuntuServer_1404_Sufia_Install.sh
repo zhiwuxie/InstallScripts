@@ -46,7 +46,7 @@ sudo gem install bundler
 bundle install
 bundle exec rake jetty:clean
 bundle exec rake sufia:jetty:config
-#bundle exec rake jetty:start
+bundle exec rake jetty:start
 bundle exec rake engine_cart:generate
 cp ~/sufia/spec/internal/config/initializers/sufia.rb ~/sufia/spec/internal/config/initializers/sufia.rb.bak
 sed -i "s|# config.fits_path = \"fits.sh\"|config.fits_path = \"$fitsdir\/$fitsver\/fits.sh\"|" ~/sufia/spec/internal/config/initializers/sufia.rb
@@ -56,5 +56,7 @@ sed -i "s|# config.fits_path = \"fits.sh\"|config.fits_path = \"$fitsdir\/$fitsv
 mkdir "$demodir"
 mv ~/sufia/spec/internal/* "$demodir/"
 rm -rf ~/sufia/spec/internal/
-cp -r ~/sufia/jetty "$demodir"
-cp -r ~/sufia/tmp "$demodir"
+#cp -r ~/sufia/jetty "$demodir"
+#cp -r ~/sufia/tmp "$demodir"
+cd $demodir
+bundle exec rails s >log.out &
