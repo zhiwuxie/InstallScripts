@@ -55,6 +55,6 @@ sed -i "s|# config.fits_path = \"fits.sh\"|config.fits_path = \"$fitsdir\/$fitsv
 # 7. Move the internal app to our location, along with jetty.
 mkdir "$demodir"
 mv ~/sufia/spec/internal/* "$demodir/"
-rmdir ~/sufia/spec/internal/
+rm -rf ~/sufia/spec/internal/
 cp ~/sufia/jetty "$demodir"
 cp ~/sufia/tmp "$demodir"
