@@ -56,5 +56,5 @@ sed -i "s|# config.fits_path = \"fits.sh\"|config.fits_path = \"$fitsdir\/$fitsv
 mkdir "$demodir"
 mv ~/sufia/spec/internal/* "$demodir/"
 rm -rf ~/sufia/spec/internal/
-cp ~/sufia/jetty "$demodir"
-cp ~/sufia/tmp "$demodir"
+cp -r ~/sufia/jetty "$demodir"
+cp -r ~/sufia/tmp "$demodir"
