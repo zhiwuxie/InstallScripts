@@ -8,10 +8,11 @@ fitsdir="$HOME/fits" # Where FITS will be installed.
 fitsver="fits-0.8.3" # Which version of FITS to install.
 demodir="$HOME/sebdemo" # Where the Sufia head will live.
 
-# 1. Update packages
+# 1. Update packages and install dependencies and tools
 cd ~
 sudo apt-get update
 sudo apt-get upgrade -y
+sudo apt-get install -y openjdk-7-jdk unzip build-essential git python-software-properties software-properties-common sqlites lynx
 
 # 2. Install Ruby 2.1.4
 # Brightbox also packages Passenger, which will be useful for production.
@@ -20,7 +21,6 @@ sudo apt-get update
 sudo apt-get install -y ruby2.1
 
 # 3. Install FITS
-sudo apt-get install -y openjdk-7-jdk unzip
 mkdir "$fitsdir/"
 cd "$fitsdir/"
 wget "http://projects.iq.harvard.edu/files/fits/files/$fitsver.zip"
@@ -46,12 +46,11 @@ sudo gem install bundler
 bundle install
 bundle exec rake jetty:clean
 bundle exec rake sufia:jetty:config
-bundle exec rake jetty:start
+#bundle exec rake jetty:start
 bundle exec rake engine_cart:generate
-sed "s/# config.fits_path = \"fits.sh\"/config.fits_path = \"$fitsdir\/$fitsver\/fits.sh\"/" \
-<~/sufia/spec/internal/config/initializers/sufia.rb >~/sufia/temp
-mv ~/sufia/temp ~/sufia/spec/internal/config/initializers/sufia.rb
-bundle exec rspec
+cp ~/sufia/spec/internal/config/initializers/sufia.rb ~/sufia/spec/internal/config/initializers/sufia.rb.bak
+sed -i "s|# config.fits_path = \"fits.sh\"|config.fits_path = \"$fitsdir\/$fitsver\/fits.sh\"|" ~/sufia/spec/internal/config/initializers/sufia.rb
+#bundle exec rspec
 
 # 7. Move the internal app to our location, along with jetty.
 mkdir "$demodir"
